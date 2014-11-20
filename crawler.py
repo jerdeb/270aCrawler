@@ -67,7 +67,6 @@ with open('voidlist.csv', 'rb') as csvfile:
         url="http://localhost:8080/Luzzu/compute_quality"
         r = requests.post(url, data=payload)
         r.text
-        #os.remove("/tmp/crawler/")
     print('finished')
-            
+    os.remove("/tmp/crawler/")    
             
