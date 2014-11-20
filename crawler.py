@@ -40,6 +40,10 @@ with open('voidlist.csv', 'rb') as csvfile:
             os.makedirs("/tmp/crawler/")
         g = rdflib.Graph()
         baseURI = row[1]
+        folder = "/tmp/crawler/"+row[1].replace('http://','').replace('/','')
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        folder += '/'
         try:
             result = g.parse(row[0])
         except rdflib.plugin.PluginException:
@@ -48,16 +52,16 @@ with open('voidlist.csv', 'rb') as csvfile:
              { ?a <http://rdfs.org/ns/void#dataDump> ?dataset . }"""):           
              filename = "%s"%(row)
              print("downloading " + filename)
-             urllib.urlretrieve(filename, "/tmp/crawler/"+ntpath.basename(filename))   
+             urllib.urlretrieve(filename, folder+ntpath.basename(filename))   
              if (ntpath.basename(filename).endswith(".tar.gz")):
-                tar = tarfile.open("/tmp/crawler/"+ntpath.basename(filename))
+                tar = tarfile.open(folder+ntpath.basename(filename))
                 print("Extracting: "+ntpath.basename(filename))
-                tar.extractall("/tmp/crawler/")
+                tar.extractall(folder)
                 tar.close()
-                os.remove("/tmp/crawler/"+ntpath.basename(filename))
-        datasetLocations = [ f for f in listdir("/tmp/crawler/") if isfile(join("/tmp/crawler/",f)) ]      
-        datasetStr = "/tmp/crawler/"  
-        datasetStr += ",/tmp/crawler/".join(datasetLocations);
+                os.remove(folder+ntpath.basename(filename))
+        datasetLocations = [ f for f in listdir(folder) if isfile(join(folder,f)) ]      
+        datasetStr = folder  
+        datasetStr += ","+folder.join(datasetLocations);
         print(metricsConf)
         payload = {'Dataset' : datasetStr, 'QualityReportRequired' : 'false', 'MetricsConfiguration' : metricsConf, 'BaseUri' : baseURI }
         url="http://localhost:8080/Luzzu/compute_quality"
