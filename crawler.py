@@ -12,6 +12,10 @@ from os.path import isfile, join
 from rdflib.serializer import Serializer
 from rdflib import plugin
 
+proxies = {
+  "http": "http://webcache.iai.uni-bonn.de:3128",
+}
+
 # Functions
 def identifySerialisation( fileName ):
     #add all serialisations
@@ -65,7 +69,7 @@ with open('voidlist.csv', 'rb') as csvfile:
         print(metricsConf)
         payload = {'Dataset' : datasetStr, 'QualityReportRequired' : 'false', 'MetricsConfiguration' : metricsConf, 'BaseUri' : baseURI }
         url="http://localhost:8080/Luzzu/compute_quality"
-        r = requests.post(url, data=payload)
+        r = requests.post(url, data=payload, proxies=proxies)
         r.text
     print('finished')
     os.remove("/tmp/crawler/")    
