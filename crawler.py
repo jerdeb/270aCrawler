@@ -34,6 +34,10 @@ def formatMetricConfiguration(configStr):
     return formattedStr
 
 # Main
+proxy = urllib2.ProxyHandler({'http': 'webcache.iai.uni-bonn.de:3128'})
+opener = urllib2.build_opener(proxy)
+urllib2.install_opener(opener)
+
 with open('voidlist.csv', 'rb') as csvfile:
     voidreader = csv.reader(csvfile, delimiter=",")
     metricsConf = formatMetricConfiguration(loadMetricConfiguration())
