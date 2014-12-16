@@ -6,6 +6,7 @@ import os
 import tarfile
 import requests
 import rdfextras
+import urllib2
 
 from os import listdir
 from os.path import isfile, join
