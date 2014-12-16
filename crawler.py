@@ -61,7 +61,7 @@ with open('voidlist.csv', 'rb') as csvfile:
              { ?a <http://rdfs.org/ns/void#dataDump> ?dataset . }"""):           
              filename = "%s"%(row)
              print("downloading " + filename)
-             urllib.urlretrieve(filename, folder+ntpath.basename(filename))   
+             urllib2.urlopen(filename, folder+ntpath.basename(filename))   
              if (ntpath.basename(filename).endswith(".tar.gz")):
                 tar = tarfile.open(folder+ntpath.basename(filename))
                 print("Extracting: "+ntpath.basename(filename))
