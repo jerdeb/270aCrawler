@@ -33,6 +33,14 @@ def loadMetricConfiguration():
 def formatMetricConfiguration(configStr):
     formattedStr = configStr.replace('\n', ' ').replace('\r', '').replace('"','\"')
     return formattedStr
+    
+def download(filename, folder):
+    #urllib2.urlopen(filename, folder+ntpath.basename(filename))
+    response = urllib2.urlopen(filename)
+    fh = open(folder+ntpath.basename(filename), "w")
+    fh.write(response.read())
+    fh.close()
+    
 
 # Main
 proxy = urllib2.ProxyHandler({'http': 'webcache.iai.uni-bonn.de:3128'})
@@ -61,7 +69,7 @@ with open('voidlist.csv', 'rb') as csvfile:
              { ?a <http://rdfs.org/ns/void#dataDump> ?dataset . }"""):           
              filename = "%s"%(row)
              print("downloading " + filename)
-             urllib2.urlopen(filename, folder+ntpath.basename(filename))   
+             download(filename, folder)   
              if (ntpath.basename(filename).endswith(".tar.gz")):
                 tar = tarfile.open(folder+ntpath.basename(filename))
                 print("Extracting: "+ntpath.basename(filename))
