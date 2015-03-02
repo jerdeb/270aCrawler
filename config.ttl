@@ -4,7 +4,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-[] a lmi:MetricConfiguration .
+[] a lmi:MetricConfiguration ;
     	lmi:metric "eu.diachron.qualitymetrics.accessibility.availability.DereferencibilityForwardLinks" ;
 	lmi:metric "eu.diachron.qualitymetrics.accessibility.availability.SPARQLAccessibility" ; 
 	lmi:metric "eu.diachron.qualitymetrics.accessibility.licensing.MachineReadableLicense" ; 
@@ -19,4 +19,4 @@
 	lmi:metric "eu.diachron.qualitymetrics.dynamicity.timeliness.TimelinessOfResource" ;
 	lmi:metric "eu.diachron.qualitymetrics.accessibility.availability.DereferenceabilityEstimated" ;
 	lmi:metric "eu.diachron.qualitymetrics.intrinsic.conciseness.EstimatedDuplicateInstance" ; 
-	lmi:metric "eu.diachron.qualitymetrics.intrinsic.conciseness.ExtensionalConcisenessRLBSBF" ; 
+	lmi:metric "eu.diachron.qualitymetrics.intrinsic.conciseness.ExtensionalConcisenessRLBSBF" .
